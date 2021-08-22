@@ -13,7 +13,7 @@ main ()
 
     int d = sqrt(b * b - 4 * a * c);
 
-    if ( d < 0 )
+    if (d < 0)
     {
         printf ("no KOßN");
     }
