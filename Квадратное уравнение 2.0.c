@@ -11,7 +11,7 @@ main ()
 
     scanf ("%d %d %d", &a, &b, &c);
 
-    int d = sqrt(b * b - 4 * a * c);
+    int d = sqrt (b * b - 4 * a * c);
 
     if (d < 0)
     {
