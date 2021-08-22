@@ -7,17 +7,17 @@ main ()
 
     scanf ("%d %d %d", &a, &b, &c);
 
-    int d = sqrt( b * b - 4 * a * c );
+    int d = sqrt(b * b - 4 * a * c);
 
     if ( d < 0 )
     {
-        printf ("no KOßN");
+        printf ("no KOÃŸN");
     }
     else
     {
-        float x = ( -b + d ) / ( 2 * a );
+        float x = (-b + d) / (2 * a);
 
-        float y = ( -b - d ) / ( 2 * a );
+        float y = (-b - d) / (2 * a);
 
         printf (" %.2f  %.2f ", x, y);
     }
