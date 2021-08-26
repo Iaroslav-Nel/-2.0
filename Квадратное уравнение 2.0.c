@@ -1,4 +1,4 @@
-\#include <stdio.h>
+#include <stdio.h>
 #include <math.h>
 #include <assert.h>
 // !@#param [in] a      a - Coefficient
