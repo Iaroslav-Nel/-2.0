@@ -88,15 +88,6 @@ int solvesquare (double a, double b, double c, double* x1, double* x2, double* x
     assert (isfinite (b));
     assert (isfinite (c));
 
-    if (fabs(a) < 1e-323)
-    {
-        solvelinear (a, b, c, x1, x2, x);
-
-        return 1;
-    }
-    else
-
-    {
     double d = b * b - 4 * a * c;
 
     if (d < 0)
@@ -107,9 +98,27 @@ int solvesquare (double a, double b, double c, double* x1, double* x2, double* x
     {
         if (fabs(d) < 1e-323)
         {
-            *x = -b / a;
+            if (fabs(a) < 1e-323)
+            {
+                if (fabs(b) < 1e-323)
+                {
+                    solvelinear (a, b, c, x);
 
-            return 1;
+                    return INF_ROOTS;
+                }
+                else
+                {
+                    solvelinear (a, b, c, x);
+
+                    return 1;
+                }
+            }
+            else
+            {
+                *x = -b / a;
+
+                return 1;
+            }
         }
         else
         {
@@ -119,8 +128,9 @@ int solvesquare (double a, double b, double c, double* x1, double* x2, double* x
             return 2;
         }
     }
-    }
 }
+
+
 
 
 
