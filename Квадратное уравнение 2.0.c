@@ -1,4 +1,4 @@
-#include <stdio.h>
+\#include <stdio.h>
 #include <math.h>
 #include <assert.h>
 // !@#param [in] a      a - Coefficient
@@ -88,6 +88,15 @@ int solvesquare (double a, double b, double c, double* x1, double* x2, double* x
     assert (isfinite (b));
     assert (isfinite (c));
 
+    if (fabs(a) < 1e-323)
+    {
+        solvelinear (a, b, c, x1, x2, x);
+
+        return 1;
+    }
+    else
+
+    {
     double d = b * b - 4 * a * c;
 
     if (d < 0)
@@ -110,5 +119,8 @@ int solvesquare (double a, double b, double c, double* x1, double* x2, double* x
             return 2;
         }
     }
-
+    }
 }
+
+
+
