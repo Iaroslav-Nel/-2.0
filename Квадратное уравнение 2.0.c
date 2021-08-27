@@ -6,10 +6,10 @@
 // !@#param [in] c      c - Coefficient
 // !@#param [out] x1    x1 - First root (if the equation is square)
 // !@#param [out] x2    x2 - Second root (if the equation is square)
-// !@#param [out] x     x - The sole root (if the equation is linear or discriminant of the square equation is equal to zero)
+// !@#param [out] x     x - The sole root (if the equation is linear or discriminant is equal to zero)
 
 const int INF_ROOTS = -1;    //Introduce a constant for a situation with an infinite number of roots
-const int END  = -2;
+const int END = -2;
 
 int solvelinear (double b, double c, double* x);
 int solvesquare (double a, double b, double c, double* x1, double* x2, double* x);
@@ -24,19 +24,15 @@ int main (void)
 
     int nroots = solvesquare (a, b, c, &x1, &x2, &x);
 
-    switch (nroots)      //Perform a check and make a conclusion in accordance with the number of roots
+    switch (nroots)          //Perform a check and make a conclusion in accordance with the number of roots
     {
-
-    case 0: printf ("no roots\n");
-
+    case 0: printf ("no_roots\n");
             break;
 
     case 1: printf ("x = %lg\n", x);
-
             break;
 
     case 2: printf ("x1 = %lg, x2 = %lg\n", x1, x2);
-
             break;
 
     default: break;
@@ -46,35 +42,40 @@ int main (void)
 
     switch (nroots_2)
     {
-        case INF_ROOTS: printf ("nroots = %d\n", INF_ROOTS);
-
+        case INF_ROOTS: printf ("n_roots = %d\n", INF_ROOTS);
                         break;
+
+        case 0: printf ("no_roots\n");
+                break;
+
+        case 1: printf ("x = %lg\n", x);
+                break;
 
         default: break;
     }
 }
 int solvelinear (double b, double c, double* x)   //Introduce a function for solving a linear equation
 {
-    assert (isfinite (b));      //Perform a check on the finiteness of the numbers stored in variables
+    assert (isfinite (b));  //Perform a check on the finiteness of the numbers stored in variables
     assert (isfinite (c));
 
-    if (fabs(b) < 1e-323)
-    {
-         if (fabs(c) < 1e-323)
-         {
-             return INF_ROOTS;
-         }
-         else
-         {
-             return 0;
-         }
-    }
-    else
-    {
-         *x = -c / b;
+        if (fabs(b) < 1e-323)
+        {
+             if (fabs(c) < 1e-323)
+             {
+                 return INF_ROOTS;
+             }
+             else
+             {
+                 return 0;
+             }
+        }
+        else
+        {
+             *x = -c / b;
 
-         return 1;
-    }
+             return 1;
+        }
 }
 int solvesquare (double a, double b, double c, double* x1, double* x2, double* x)  //Introduce a function for solving a square equation
 {
@@ -82,7 +83,7 @@ int solvesquare (double a, double b, double c, double* x1, double* x2, double* x
     assert (isfinite (b));
     assert (isfinite (c));
 
-    double d = b * b - 4 * a * c;     //Count a discriminant
+    double d = b * b - 4 * a * c;
 
     if (d < 0)
     {
@@ -105,12 +106,18 @@ int solvesquare (double a, double b, double c, double* x1, double* x2, double* x
         }
         else
         {
-            *x1 = (-b + sqrt(d)) / (2 * a);
-            *x2 = (-b - sqrt(d)) / (2 * a);
+            if (fabs(a) < 1e-323)
+            {
+                solvelinear (b, c, x);
+            }
+            else
+            {
+                *x1 = (-b + sqrt(d)) / (2 * a);
+                *x2 = (-b - sqrt(d)) / (2 * a);
 
-            return 2;
+                return 2;
+            }
         }
     }
-
     return END;
 }
