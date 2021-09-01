@@ -27,7 +27,7 @@ int main (void)    //!< Declaring the main function
     double b = 0;
     double c = 0;
     
-    if (scanf ("%lg %lg %lg", &a, &b, &c)
+    if (scanf ("%lg %lg %lg", &a, &b, &c) < 3)
     {
         printf ("ERROR: were recorded less than 3 values");
     }
